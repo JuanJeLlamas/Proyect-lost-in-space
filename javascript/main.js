@@ -26,15 +26,16 @@ const startGame = () => {
 }
 const shotProta = (event) => {
   if (event.code === "ArrowUp")   {
-    this.shot = new Shot()
-  game.shotArr.push(this.shot)
-  console.log(game.shotArr)}
+    let shot = new Shot(game.prota.x, game.prota.y)
+    console.log(game.prota.y)
+  game.shotArr.push(shot)
+  }
 }
 
 
 const flyProta = (event) => {
   if (event.code === "Space") {
-    console.log("Astronauta Vuela!")
+    //console.log("Astronauta Vuela!")
     game.prota.jumpProta()
   }
 }

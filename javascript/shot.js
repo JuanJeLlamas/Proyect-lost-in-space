@@ -1,8 +1,8 @@
-class Shot extends Prota{
+class Shot{
 
 constructor(x,y){
-
-  super(x,y)
+    this.x = x;
+    this.y = y;
     this.w = 70;
     this.h = 35;
     this.image = new Image() ;

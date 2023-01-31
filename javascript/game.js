@@ -54,7 +54,7 @@ class Game {
   if (event.code === "ArrowUp" && this.shotArr.length < 1){
      
     let nuevoshot = new Shot()
-    console.log("Añadiendo a Array")
+    //console.log("Añadiendo a Array")
     this.shotArr.push(nuevoshot)
   }
 }
@@ -74,7 +74,7 @@ class Game {
       this.meteorito.h + this.meteorito.y > this.prota.y
     ) {
       
-      console.log("Protagonista Chocado");
+      //console.log("Protagonista Chocado");
       // activar el fin del juego (RECORDAR)////*/*/*/**/*//*/*/*/*/**//*/*/*/**//**/*/ */ */ */ */
     }
   };
@@ -87,7 +87,7 @@ class Game {
       this.meteorito2.h + this.meteorito2.y > this.prota.y
     ) {
       
-      console.log("Protagonista Chocado");
+      //console.log("Protagonista Chocado");
       // activar el fin del juego (RECORDAR)//********//*******///*****////******///// */ */ */ */
     }
   };

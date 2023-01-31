@@ -10,7 +10,7 @@ class Meteorito {
       this.image = new Image() ;
        this.image.src = "./images/roca.png"
                            
-      console.log("meteorito creado")
+      //console.log("meteorito creado")
     }
   
   
