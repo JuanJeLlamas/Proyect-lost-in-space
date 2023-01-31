@@ -7,9 +7,9 @@ class Game {
     this.isGameOn = true;
   
 
-    this.meteorito = new Meteorito(300);
+    this.meteorito = new Meteorito(90);
 
-    this.meteorito2 = new Meteorito(85);
+    this.meteorito2 = new Meteorito(285);
 
     this.shot = new Shot(this.prota.x, this.prota.y);
     this.shotArr = [];
@@ -18,7 +18,7 @@ class Game {
 
   // Metodos
 
-  // collision con el suelo
+  // collision astronauta con el suelo
   checkColisionProtaSuelo = () => {
     if (
       this.prota.y + this.prota.h > canvas.height ||
@@ -27,7 +27,10 @@ class Game {
       this.gameOver();
     }
   };
- 
+  // colision disparo "shot"
+
+
+
   // gameOver => enviar a la pantalla final
   gameOver = () => {
     // 1. IMPORTANTE! detener la recursion
@@ -53,9 +56,9 @@ class Game {
 
   if (event.code === "ArrowUp" && this.shotArr.length < 1){
      
-    let nuevoshot = new Shot()
+    let shot = new Shot()
     //console.log("Añadiendo a Array")
-    this.shotArr.push(nuevoshot)
+    this.shotArr.push(shot)
   }
 }
   returnMeteorito2 = () => {
@@ -68,29 +71,50 @@ class Game {
   };
   colisionProtaMeteorito = () => {
     if (
-      this.meteorito.x < this.prota.x + this.prota.w &&
+      this.meteorito.x -10 < this.prota.x  &&
       this.meteorito.x + this.meteorito.w > this.prota.x &&
       this.meteorito.y < this.prota.y + this.prota.h &&
       this.meteorito.h + this.meteorito.y > this.prota.y
     ) {
-      
+      this.gameOver();
       //console.log("Protagonista Chocado");
       // activar el fin del juego (RECORDAR)////*/*/*/**/*//*/*/*/*/**//*/*/*/**//**/*/ */ */ */ */
     }
   };
 
+
+
   colisionProtaMeteorito2 = () => {
     if (
-      this.meteorito2.x < this.prota.x + this.prota.w &&
+      this.meteorito2.x < this.prota.x  &&
       this.meteorito2.x + this.meteorito2.w > this.prota.x &&
       this.meteorito2.y < this.prota.y + this.prota.h &&
       this.meteorito2.h + this.meteorito2.y > this.prota.y
     ) {
-      
+      this.gameOver();
       //console.log("Protagonista Chocado");
       // activar el fin del juego (RECORDAR)//********//*******///*****////******///// */ */ */ */
     }
   };
+
+
+  checkColisionDisparo = () => {
+    this.shotArr.forEach((eachShot) => {
+   
+    if (
+      eachShot.x < this.meteorito.x + this.meteorito.w &&
+      eachShot.x + eachShot.w > this.meteorito.x &&
+      eachShot.y < this.meteorito.y + this.meteorito.h &&
+      eachShot.h + eachShot.y > this.meteorito.y 
+    )
+   
+    {this.shotArr.shift()
+  console.log("IMPACTO ON")}
+  })}
+  
+  
+
+
   drawBg = () => {
     ctx.drawImage(this.bg, 0, 0, canvas.width, canvas.height);
   };
@@ -118,7 +142,8 @@ class Game {
     this.colisionProtaMeteorito2();
     this.returnMeteorito2();
     this.shot.moveShot();
-    
+    this.checkColisionDisparo();
+    ;
     // 3. dibujado de los elementos
     
     this.drawBg();

@@ -25,8 +25,8 @@ const startGame = () => {
 
 }
 const shotProta = (event) => {
-  if (event.code === "ArrowUp")   {
-    let shot = new Shot(game.prota.x, game.prota.y)
+  if (event.code === "ArrowUp" && game.shotArr.length < 10)   {
+    let shot = new Shot(game.prota.x +22, game.prota.y + 20)
     console.log(game.prota.y)
   game.shotArr.push(shot)
   }
