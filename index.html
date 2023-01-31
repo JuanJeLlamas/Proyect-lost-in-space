@@ -4,31 +4,34 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Flappy Bird</title>
+  <title>Perdido en el Espacio</title>
   <link rel="stylesheet" href="./styles/style.css">
 </head>
 <body>
 
   <div class="container">
 
-    <!-- SPLASH SCREEN -->
-    <div id="splash-screen" class="container">
-      <img src="./images/logo.png" width="500" alt="logo">
-      <button id="start-btn">Start!</button>
+    <!-- PANTALLA DE TITULO -->
+    <div id="inicio-screen" class="container">
+      <img src="./images/perdido-en-el-espacio.png" width="500" alt="logo">
+      <button id="start-btn">*Comenzar*</button>
     </div>
     
-    <!-- GAME SCREEN -->
+    <!-- CANVAS - PANTALLA PRINCIPAL -->
     <canvas id="my-canvas" width="600" height="400"></canvas>
-    
-    <!-- GAME OVER SCREEN -->
+    <P>Puntuacion : <span id ="puntos">0</span></p>
+    <!--PANTALLA GAME OVER -->
     <div id="gameover-screen" class="container">
-      <img src="./images/gameover.png" width="500" alt="logo">
-      <button id="restart-btn">Play Again!</button>
+      <img src="./images/game-over.gif" width="500" alt="logo">
+      <button id="restart-btn">*Reiniciar*</button>
     </div>
 
   </div>
 
   <script src="./javascript/main.js"></script>
-
+  <script src="./javascript/game.js"></script>
+  <script src="./javascript/prota.js"></script>
+  <script src="./javascript/roca.js"></script>
+  <script src="./javascript/shot.js"></script>
 </body>
 </html>

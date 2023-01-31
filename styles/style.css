@@ -8,7 +8,7 @@ body {
 }
 
 #start-btn, #restart-btn {
-  background-color: green;
+  background-color: rgb(0, 0, 0);
   color: white;
   padding: 20px;
   font-size: 20px;
@@ -22,4 +22,12 @@ body {
   justify-content: center;
   align-items: center;
   margin: 50px;
+}
+
+#my-canvas{
+  display: none;
+}
+
+#gameover-screen{
+  display: none;
 }
