@@ -48,6 +48,7 @@ class Game {
   gameOver = () => {
     // 1. IMPORTANTE! detener la recursion
     this.isGameOn = false;
+    sound.pause();
 
     // 2. ocultar el canvas
     canvas.style.display = "none";
@@ -153,7 +154,11 @@ class Game {
   clearCanvas = () => {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
   };
-
+ gravedad =() => {
+if (this.prota.speed < 2.5)
+  {this.prota.speed += 0.05} else 
+  {this.prota.speed += 0}
+ }
   //  G A M E   L O O P    //
 
   gameLoop = () => {
@@ -166,7 +171,7 @@ class Game {
     // 2. movimientos y acciones de todos los elementos
    
     this.prota.gravity();
-    this.prota.speed += 0.05;
+    this.gravedad()
     this.checkColisionProtaSuelo();
     this.colisionProtaMeteorito();
     this.returnMeteorito();

@@ -27,15 +27,15 @@ class Prota {
 
   // volar
   jumpProta = () => {
-    this.speed -= 0.22;
+   if (this.speed > -2) {this.speed -= 0.22;
 
     this.image.src = "./images/prota2.png";
   
     this.speed -= 0.22;
   }
-
+else {this.speed -= 0}
  
 
 }
 
-
+}

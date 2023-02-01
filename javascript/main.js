@@ -39,7 +39,7 @@ const startGame = () => {
 
   setInterval(function() {
     oxigeno--;
-    console.log(tiempo);
+    
   }, 333);
   
   sound.play();
