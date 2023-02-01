@@ -5,6 +5,8 @@ body {
 
 #my-canvas {
   background-color: darkgray;
+  
+  
 }
 
 #start-btn, #restart-btn {
@@ -30,4 +32,25 @@ body {
 
 #gameover-screen{
   display: none;
+}
+#puntos-p{
+
+  position: relative;
+  left:   -235px;
+  top: -390px;
+  color: white;
+  justify-content: center;
+  align-items: left;
+  margin: 1px;
+}
+#oxigeno-p {
+  
+  position: relative;
+  left:  -240px;
+  top: -390px;
+  color: white;
+  justify-content: center;
+  align-items: left;
+  margin: 1px;
+
 }

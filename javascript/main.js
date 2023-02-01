@@ -7,6 +7,8 @@ const ctx = canvas.getContext("2d")
 let game; 
 let scoreDOM = document.querySelector("#puntos")
 let oxigenDOM = document.querySelector("#oxigeno")
+let divScore = document.querySelector("#puntos-p")
+let divOxigeno = document.querySelector("#oxigeno-p")
 let puntos = 0;
 let oxigeno = 100;
 var sound = new Audio("./sound/musicafondo.mp3");
@@ -15,6 +17,14 @@ sound.volume = 0.05
 const jetsound = new Audio("./sound/jet.mp3");
 
 
+function showDiv() {
+  div.style.display = "block";
+}
+
+function hideDiv() {
+  divScore.style.display = "none";
+  divOxigeno.style.display = "none";
+}
 
 // * STATE MANAGEMENT FUNCTIONS
 const startGame = () => {
@@ -26,13 +36,15 @@ const startGame = () => {
 
   // 2. crear un objeto de la clase Game
   game = new Game() 
+
   setInterval(function() {
     oxigeno--;
     console.log(tiempo);
   }, 333);
+  
   sound.play();
   game.gameLoop()
-
+ 
 }
 const shotProta = (event) => {
   if (event.code === "ArrowUp" && game.shotArr.length < 2)   {
