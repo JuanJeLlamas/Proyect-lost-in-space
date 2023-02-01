@@ -15,7 +15,6 @@ constructor(x,y){
 
 drawShot = () => {
     ctx.drawImage(this.image, this.x, this.y, this.w, this.h )
-    ctx.cl
   }
 
   // Movimiento meteoro

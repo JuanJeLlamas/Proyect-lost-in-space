@@ -10,10 +10,11 @@ class Game {
     this.meteorito = new Meteorito(90);
 
     this.meteorito2 = new Meteorito(285);
-
-    this.shot = new Shot(this.prota.x, this.prota.y);
+;
     this.shotArr = [];
     
+    this.shot = new Shot(this.prota.x, this.prota.y)
+    this.o2item = new o2()
   }
 
   // Metodos
@@ -21,13 +22,25 @@ class Game {
   // collision astronauta con el suelo
   checkColisionProtaSuelo = () => {
     if (
-      this.prota.y + this.prota.h > canvas.height ||
-      this.prota.y + this.prota.h < 0
+      this.prota.y  > canvas.height ||
+      this.prota.y  < 0
     ) {
       this.gameOver();
     }
   };
-  // colision disparo "shot"
+  
+
+  collisionO2 = () => {
+    if (
+      this.o2item.x -10 < this.prota.x  &&
+      this.o2item.x + this.o2item.w > this.prota.x &&
+      this.o2item.y < this.prota.y + this.prota.h &&
+      this.o2item.h + this.o2item.y > this.prota.y 
+    ) {
+      oxigeno += 50;
+      this.o2item.x = 700;
+    }
+  }
 
 
 
@@ -44,7 +57,6 @@ class Game {
   };
   returnMeteorito = () => {
     if (this.meteorito.x < -80 ) {
-      puntos = puntos + 100;
       this.meteorito.x = 600;
       this.meteorito.y = Math.floor(Math.random() * 400);
     }
@@ -163,7 +175,8 @@ class Game {
     this.shot.moveShot();
     this.checkColisionDisparo();
     this.checkColisionDisparo2()
-    ;
+    this.collisionO2();
+    
     // 3. dibujado de los elementos
     
     this.drawBg();
@@ -177,9 +190,11 @@ class Game {
       eachShot.drawShot()
       eachShot.moveShot()
     })
-    
+    this.o2item.drawo2()
+    this.o2item.moveo2()
     // 4. recursion y control
     scoreDOM.innerText = puntos
+    oxigenDOM.innerText = oxigeno
     if (this.isGameOn === true) {
       requestAnimationFrame(this.gameLoop);
     }
