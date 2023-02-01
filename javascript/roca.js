@@ -21,7 +21,7 @@ class Meteorito {
       ctx.drawImage(this.image, this.x, this.y, this.w, this.h )
     }
   
-    // Movimiento meteoro
+    // Movimiento meteoro con vibrato
     moveMeteo = () => {
       this.x -=  1.25
       this.y -= Math.floor(Math.random() * (5 - (-5) + 1) + (-5))
