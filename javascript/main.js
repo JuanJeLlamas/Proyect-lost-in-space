@@ -49,7 +49,7 @@ const flyProta = (event) => {
 startBtnDOM.addEventListener("click", startGame)
 window.addEventListener("keydown", flyProta)
 window.addEventListener("keydown" , shotProta)
-  
+window.addEventListener("keydown", flyProta)  
 
 
 

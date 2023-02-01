@@ -24,6 +24,7 @@ class Meteorito {
     // Movimiento meteoro
     moveMeteo = () => {
       this.x -=  1.25
+      this.y -= Math.floor(Math.random() * (5 - (-5) + 1) + (-5))
     }
   
   }

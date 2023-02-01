@@ -43,7 +43,7 @@ class Game {
     gameoverScreenDOM.style.display = "flex";
   };
   returnMeteorito = () => {
-    if (this.meteorito.x < -80) {
+    if (this.meteorito.x < -80 ) {
       puntos = puntos + 100;
       this.meteorito.x = 600;
       this.meteorito.y = Math.floor(Math.random() * 400);
@@ -74,7 +74,7 @@ class Game {
       this.meteorito.x -10 < this.prota.x  &&
       this.meteorito.x + this.meteorito.w > this.prota.x &&
       this.meteorito.y < this.prota.y + this.prota.h &&
-      this.meteorito.h + this.meteorito.y > this.prota.y
+      this.meteorito.h + this.meteorito.y > this.prota.y 
     ) {
       this.gameOver();
       //console.log("Protagonista Chocado");
@@ -109,9 +109,28 @@ class Game {
     )
    
     {this.shotArr.shift()
-  console.log("IMPACTO ON")}
+      this.meteorito.x = 600;
+      this.meteorito.y = Math.floor(Math.random() * 400)
+  puntos += 150}
   })}
   
+  checkColisionDisparo2 = () => {
+    this.shotArr.forEach((eachShot) => {
+   
+    if (
+      eachShot.x < this.meteorito2.x + this.meteorito2.w &&
+      eachShot.x + eachShot.w > this.meteorito2.x &&
+      eachShot.y < this.meteorito2.y + this.meteorito2.h &&
+      eachShot.h + eachShot.y > this.meteorito2.y 
+    )
+   
+    {this.shotArr.shift()
+      this.meteorito2.x = 650;
+      this.meteorito2.y = Math.floor(Math.random() * 400);
+      this.meteorito2.h = Math.floor(Math.random() * (125 - 40 + 1)) + 40;
+      this.meteorito2.w = Math.floor(Math.random() * (110 - 40 + 1)) + 40;
+  puntos += 150}
+  })}
   
 
 
@@ -143,6 +162,7 @@ class Game {
     this.returnMeteorito2();
     this.shot.moveShot();
     this.checkColisionDisparo();
+    this.checkColisionDisparo2()
     ;
     // 3. dibujado de los elementos
     
