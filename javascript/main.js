@@ -9,6 +9,7 @@ let scoreDOM = document.querySelector("#puntos")
 let oxigenDOM = document.querySelector("#oxigeno")
 let divScore = document.querySelector("#puntos-p")
 let divOxigeno = document.querySelector("#oxigeno-p")
+let resetDOM = document.querySelector("#restart-btn")
 let puntos = 0;
 let oxigeno = 100;
 var sound = new Audio("./sound/musicafondo.mp3");
@@ -17,14 +18,7 @@ sound.volume = 0.05
 const jetsound = new Audio("./sound/jet.mp3");
 
 
-function showDiv() {
-  div.style.display = "block";
-}
 
-function hideDiv() {
-  divScore.style.display = "none";
-  divOxigeno.style.display = "none";
-}
 
 // * STATE MANAGEMENT FUNCTIONS
 const startGame = () => {
@@ -33,11 +27,12 @@ const startGame = () => {
   // 1. cambiar la pantalla
   startScreenDOM.style.display = "none";
   canvas.style.display = "block";
-
-  // 2. crear un objeto de la clase Game
+  divOxigeno.style.display="block";
+  divScore.style.display="block" ;
+   // 2. crear un objeto de la clase Game
   game = new Game() 
 
-  setInterval(function() {
+  let intervalOx = setInterval(function() {
     oxigeno--;
     
   }, 333);
@@ -60,19 +55,35 @@ const flyProta = (event) => {
   
   jetsound.play()
   jetsound.loop = false;
-  jetsound.volume = 0.08
+  jetsound.volume = 0.8
     //console.log("Astronauta Vuela!")
     game.prota.jumpProta()
   } else {jetsound.pause() }
 }
 
+const restartGame = () => {
+ 
 
+  // 1. cambiar la pantalla
+  gameoverScreenDOM.style.display = "none";
+  startScreenDOM.style.display = "none";
+  canvas.style.display = "block";
+  divOxigeno.style.display="block";
+  divScore.style.display="block" ;
+   // 2. crear un objeto de la clase Game
+   game = new Game() 
+  oxigeno = 100;  
+  sound.play();
+  game.gameLoop()
+ 
+}
 
 
 
 
 // * ADD EVENT LISTENERS
 startBtnDOM.addEventListener("click", startGame)
+resetDOM.addEventListener("click", restartGame)
 window.addEventListener("keydown", flyProta)
 window.addEventListener("keydown" , shotProta)
 window.addEventListener("keydown", flyProta)  
@@ -82,5 +93,5 @@ document.addEventListener("keyup", function(event) {
   }
 });
 
-
+//window.addEventListener("keydown", generaMeteo)
 

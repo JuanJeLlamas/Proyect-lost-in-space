@@ -33,7 +33,7 @@ class Prota {
   
     this.speed -= 0.22;
   }
-else {this.speed -= 0}
+
  
 
 }

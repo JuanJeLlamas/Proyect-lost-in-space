@@ -34,7 +34,7 @@ body {
   display: none;
 }
 #puntos-p{
-
+  display: none;
   position: relative;
   left:   -235px;
   top: -390px;
@@ -44,7 +44,7 @@ body {
   margin: 1px;
 }
 #oxigeno-p {
-  
+  display: none;
   position: relative;
   left:  -240px;
   top: -390px;

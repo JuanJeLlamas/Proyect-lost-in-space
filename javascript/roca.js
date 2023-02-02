@@ -1,12 +1,12 @@
 class Meteorito {
 
     
-    constructor(yMet) {
+    constructor() {
       
-      this.x = 600;
-      this.y = yMet;
-      this.w = 90;
-      this.h = 125;
+      this.x = Math.floor(Math.random() * (700 - 600 + 1)) + 600
+      this.y = Math.floor(Math.random() * (350 - 20 + 1)) + 20
+      this.h = Math.floor(Math.random() * (180 - 20 + 1)) + 40;
+      this.w = Math.floor(Math.random() * (150 - 40 + 1)) + 40;
       this.image = new Image() ;
        this.image.src = "./images/roca.png"
                            
@@ -26,7 +26,6 @@ class Meteorito {
       this.x -=  1.25
       this.y -= Math.floor(Math.random() * (5 - (-5) + 1) + (-5))
     }
-  
-  }
 
-  
+    
+  }
