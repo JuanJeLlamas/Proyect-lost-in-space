@@ -23,7 +23,7 @@ class Meteorito {
   
     // Movimiento meteoro con vibrato
     moveMeteo = () => {
-      this.x -=  1.25
+      this.x -=  1.25 + (Dif / 2)
       this.y -= Math.floor(Math.random() * (5 - (-5) + 1) + (-5))
     }
 

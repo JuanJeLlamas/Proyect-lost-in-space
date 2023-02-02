@@ -4,8 +4,8 @@ class Prota {
   constructor(x, y) {
     this.x = x
     this.y = y
-    this.x = 80; 
-    this.y = 50; 
+    this.x = 95; 
+    this.y = 30; 
     this.h = 49; 
     this.w = 40; 
     this.speed = 0.0;

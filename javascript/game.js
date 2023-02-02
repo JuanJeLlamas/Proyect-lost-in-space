@@ -10,9 +10,10 @@ class Game {
     this.shotArr = [];
     this.meteoroArr = [];
     this.o2item = new o2();
-   
-    
+    this.Dif = 0;
+    this.dificultad();
     sound.currentTime = 0;
+    
   }
 
   // Metodos
@@ -23,23 +24,25 @@ class Game {
       this.gameOver();
     }
   };
-*/
+*/polvoEspacial = () =>{
 
+
+  this.image = new Image() ;
+  this.image.src = "./images/polvo.png"
+  ctx.drawImage(this.image, this.x, this.y, this.w, this.h )
+  this.x = 500
+  this.x -= 1
+}
 
   checkColisionProtaSuelo = () => {
-   
     if (this.prota.y > canvas.height) {
       this.prota.y -= 10;
       oxigeno = oxigeno - 5;
-
-    } else if (
-      
-      this.prota.y < -35) {           
+    } else if (this.prota.y < -35) {
       this.prota.y += 10;
-      oxigeno = oxigeno - 5              ;
+      oxigeno = oxigeno - 5;
     }
   };
-
 
   collisionO2 = () => {
     if (
@@ -53,16 +56,17 @@ class Game {
       oxigeno += 30;
       this.o2item.x = 700;
       this.o2item.x -= 0;
-      this.y =  Math.floor(Math.random() * 300) + 50;
+      this.y = Math.floor(Math.random() * 300) + 50;
     }
   };
 
   // gameOver => enviar a la pantalla final
   gameOver = () => {
-    
     // 1. IMPORTANTE! detener la recursion
     this.isGameOn = false;
     sound.pause();
+    gameOverSound.volume = 0.1;
+    gameOverSound.play();
 
     // 2. ocultar el canvas
     canvas.style.display = "none";
@@ -73,31 +77,42 @@ class Game {
 
   shotProta = (event) => {
     if (event.code === "ArrowUp" && this.shotArr.length < 3) {
-      
       let shot = new Shot();
       //console.log("Añadiendo a Array")
       this.shotArr.push(shot);
-      
-      
-      
     }
   };
-
+  dificultad = () => {
+    
+    if (puntos === 1000 ) {
+      this.Dif = 1;
+      console.log(this.Dif)
+    } else if ( puntos === 2000){
+      this.Dif = 2
+      console.log(this.Dif)
+    } else if( puntos === 3000){
+      this.Dif = 4
+    } else if ( puntos === 5000){
+      this.Dif = 6
+    } else if ( puntos === 7500){
+      this.Dif = 8
+    }
+  };
   generaMeteo = () => {
-    if (this.meteoroArr.length < 4) {
+    if (this.meteoroArr.length < 4 + this.Dif) {
       let meteorito = new Meteorito();
       console.log("Añadiendo a Array ");
       this.meteoroArr.push(meteorito);
     }
   };
- // returnMeteorito2 = () => {
+  // returnMeteorito2 = () => {
   //  if (this.meteorito2.x < -80) {
   //    this.meteorito2.x = 650;
-   //   this.meteorito2.y = Math.floor(Math.random() * 400);
+  //   this.meteorito2.y = Math.floor(Math.random() * 400);
   //    this.meteorito2.h = Math.floor(Math.random() * (125 - 40 + 1)) + 40;
   //    this.meteorito2.w = Math.floor(Math.random() * (110 - 40 + 1)) + 40;
   //  }
- // };
+  // };
 
   //*colisionProtaMeteorito2 = () => {
   // if (
@@ -112,14 +127,12 @@ class Game {
 
   colisionProtaMeteorito = () => {
     this.meteoroArr.forEach((eachMeteo) => {
-               
       if (
         eachMeteo.x < this.prota.x + this.prota.w &&
         eachMeteo.x + eachMeteo.w > this.prota.x &&
         eachMeteo.y < this.prota.y + this.prota.h &&
         eachMeteo.h + eachMeteo.y > this.prota.y
       ) {
-        
         this.gameOver();
         //console.log("Protagonista Chocado");
         // activar el fin del juego (RECORDAR)////*/*/*/**/*//*/*/*/*/**//*/*/*/**//**/*/ */ */ */ */
@@ -146,12 +159,12 @@ class Game {
       this.meteoroArr.shift();
     }
   };
-sinOxigeno = () => {
-  if(oxigeno <= 0) {
-    this.gameOver()}
-}
+  sinOxigeno = () => {
+    if (oxigeno <= 0) {
+      this.gameOver();
+    }
+  };
 
-  
   /*      COLISION TIPO FLECHA 
 
   colisionShotArrMeteoroArr = () => {                          
@@ -173,11 +186,11 @@ sinOxigeno = () => {
   }; */
   removeShot = () => {
     this.shotArr.forEach((bala) => {
-    if (bala.x > 620){
-      this.shotArr.shift()
-    }
-  })
-}
+      if (bala.x > 620) {
+        this.shotArr.shift();
+      }
+    });
+  };
   // COLISION TIPO forEach()
 
   colisionShotArrMeteoroArr = () => {
@@ -188,18 +201,19 @@ sinOxigeno = () => {
           bala.x < meteoro.x + meteoro.w &&
           bala.y + bala.h > meteoro.y &&
           bala.y < meteoro.y + meteoro.h
-        ) { puntos += 100;
+        ) {
+          puntos += 100;
           ctx.globalAlpha = 0.5;
-          romperSound.volume = 0.3
-          romperSound.pause()
+          romperSound.volume = 0.3;
+          romperSound.pause();
           romperSound.currentTime = 0;
-          romperSound.play()
+          romperSound.play();
           romperSound.loop = false;
           this.shotArr.splice(this.shotArr.indexOf(bala), 1);
           this.meteoroArr.splice(this.meteoroArr.indexOf(meteoro), 1);
-          ctx.globalAlpha = 0.9
+          ctx.globalAlpha = 0.9;
           setTimeout(function () {
-           ctx.globalAlpha = 1;
+            ctx.globalAlpha = 1;
           }, 30);
         }
       });
@@ -230,7 +244,7 @@ sinOxigeno = () => {
     this.clearCanvas();
 
     // 2. movimientos y acciones de todos los elementos
-
+       
     this.prota.gravity();
     this.gravedad();
     this.checkColisionProtaSuelo();
@@ -238,7 +252,7 @@ sinOxigeno = () => {
     this.collisionO2();
     this.colisionShotArrMeteoroArr();
     // 3. dibujado de los elementos
-this.removeShot();
+    this.removeShot();
     this.drawBg();
     this.prota.drawProta();
     //this.shot.drawShot();
@@ -246,7 +260,9 @@ this.removeShot();
       eachShot.drawShot();
       eachShot.moveShot();
     });
-   // this.removeShot();
+    this.dificultad();
+    this.polvoEspacial();
+    // this.removeShot();
     this.generaMeteo();
     this.removeMeteo();
     this.meteoroArr.forEach((eachMeteo) => {

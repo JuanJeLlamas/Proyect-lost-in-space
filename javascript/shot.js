@@ -27,9 +27,9 @@ drawShot = () => {
               
   }
 
-  // Movimiento meteoro
+  
   moveShot = () => {
-    this.x +=  3
+    this.x +=  3 
     
   }
 

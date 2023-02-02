@@ -5,6 +5,7 @@ const startScreenDOM = document.querySelector("#inicio-screen")
 const gameoverScreenDOM = document.querySelector("#gameover-screen")
 const ctx = canvas.getContext("2d")
 let game; 
+let Dif = 0;
 let scoreDOM = document.querySelector("#puntos")
 let oxigenDOM = document.querySelector("#oxigeno")
 let divScore = document.querySelector("#puntos-p")
@@ -19,7 +20,7 @@ const jetsound = new Audio("./sound/jet.mp3");
 const laserSound = new Audio("./sound/laser.mp3")
 const romperSound = new Audio("./sound/romper.mp3")
 const itemSound = new Audio ("./sound/item.mp3")
-
+const gameOverSound = new Audio ("./sound/gameover.mp3")
 
 // * STATE MANAGEMENT FUNCTIONS
 function startGame() {
@@ -43,7 +44,7 @@ function startGame() {
 
 }
 let shotProta = (event) => {
-  if (event.code === "ArrowUp" && game.shotArr.length < 2) {
+  if (event.code === "ArrowUp" && game.shotArr.length < 4) {
     let shot = new Shot(game.prota.x +22, game.prota.y + 20);
     game.shotArr.push(shot);
   }
