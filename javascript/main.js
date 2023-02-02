@@ -14,40 +14,41 @@ let puntos = 0;
 let oxigeno = 100;
 var sound = new Audio("./sound/musicafondo.mp3");
 sound.loop = true;
-sound.volume = 0.05
+sound.volume = 0.1
 const jetsound = new Audio("./sound/jet.mp3");
-
-
+const laserSound = new Audio("./sound/laser.mp3")
+const romperSound = new Audio("./sound/romper.mp3")
+const itemSound = new Audio ("./sound/item.mp3")
 
 
 // * STATE MANAGEMENT FUNCTIONS
-const startGame = () => {
- 
+function startGame() {
+
 
   // 1. cambiar la pantalla
-  startScreenDOM.style.display = "none";
-  canvas.style.display = "block";
-  divOxigeno.style.display="block";
-  divScore.style.display="block" ;
-   // 2. crear un objeto de la clase Game
-  game = new Game() 
+  startScreenDOM.style.display = "none"
+  canvas.style.display = "block"
+  divOxigeno.style.display = "block"
+  divScore.style.display = "block"
+  // 2. crear un objeto de la clase Game
+  game = new Game()
 
-  let intervalOx = setInterval(function() {
-    oxigeno--;
-    
-  }, 333);
-  
-  sound.play();
+  let intervalOx = setInterval(function () {
+    oxigeno--
+
+  }, 500)
+
+  sound.play()
   game.gameLoop()
- 
+
 }
-const shotProta = (event) => {
-  if (event.code === "ArrowUp" && game.shotArr.length < 2)   {
-    let shot = new Shot(game.prota.x +22, game.prota.y + 20)
-    console.log(game.prota.y)
-  game.shotArr.push(shot)
+let shotProta = (event) => {
+  if (event.code === "ArrowUp" && game.shotArr.length < 2) {
+    let shot = new Shot(game.prota.x +22, game.prota.y + 20);
+    game.shotArr.push(shot);
   }
 }
+
 
 
 const flyProta = (event) => {
@@ -55,7 +56,7 @@ const flyProta = (event) => {
   
   jetsound.play()
   jetsound.loop = false;
-  jetsound.volume = 0.8
+  jetsound.volume = 0.3
     //console.log("Astronauta Vuela!")
     game.prota.jumpProta()
   } else {jetsound.pause() }
@@ -72,6 +73,7 @@ const restartGame = () => {
   divScore.style.display="block" ;
    // 2. crear un objeto de la clase Game
    game = new Game() 
+  puntos = 0;
   oxigeno = 100;  
   sound.play();
   game.gameLoop()
@@ -93,5 +95,5 @@ document.addEventListener("keyup", function(event) {
   }
 });
 
-//window.addEventListener("keydown", generaMeteo)
+
 

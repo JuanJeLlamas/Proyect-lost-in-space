@@ -8,6 +8,7 @@ class o2 {
       this.w = 50;
       this.h = 50;
       this.image = new Image() ;
+     
        this.image.src = "./images/o2.png"
                            
       
@@ -22,9 +23,18 @@ class o2 {
     }
   
   
-    moveo2 = () => {
-      if (oxigeno < 60) {this.x -=  1.80}
-      
+    moveo2 = () => { 
+      if (
+        oxigeno < 25){
+          this.x -= 3
+          if(this.x < 0){
+            this.x = 700
+            this.y =  Math.floor(Math.random() * 300) + 50;
+          }
+        } else if (
+          oxigeno < 67){
+      this.x -=  2}
+
     }
   
   }

@@ -5,15 +5,14 @@ class Game {
     this.prota = new Prota();
     this.frames = 1;
     this.isGameOn = true;
-
     this.meteorito = new Meteorito(90);
-
     this.meteorito2 = new Meteorito(285);
     this.shotArr = [];
     this.meteoroArr = [];
-
-    this.shot = new Shot(this.prota.x, this.prota.y);
     this.o2item = new o2();
+   
+    
+    sound.currentTime = 0;
   }
 
   // Metodos
@@ -25,6 +24,8 @@ class Game {
     }
   };
 */
+
+
   checkColisionProtaSuelo = () => {
    
     if (this.prota.y > canvas.height) {
@@ -47,15 +48,18 @@ class Game {
       this.o2item.y < this.prota.y + this.prota.h &&
       this.o2item.h + this.o2item.y > this.prota.y
     ) {
-      oxigeno += 50;
+      itemSound.volume = 0.1;
+      itemSound.play();
+      oxigeno += 30;
       this.o2item.x = 700;
+      this.o2item.x -= 0;
+      this.y =  Math.floor(Math.random() * 300) + 50;
     }
   };
 
   // gameOver => enviar a la pantalla final
   gameOver = () => {
-    this.prota.h += 5;
-    this.prota.w += 5;
+    
     // 1. IMPORTANTE! detener la recursion
     this.isGameOn = false;
     sound.pause();
@@ -68,10 +72,14 @@ class Game {
   };
 
   shotProta = (event) => {
-    if (event.code === "ArrowUp" && this.shotArr.length < 1) {
+    if (event.code === "ArrowUp" && this.shotArr.length < 3) {
+      
       let shot = new Shot();
       //console.log("Añadiendo a Array")
       this.shotArr.push(shot);
+      
+      
+      
     }
   };
 
@@ -82,14 +90,14 @@ class Game {
       this.meteoroArr.push(meteorito);
     }
   };
-  returnMeteorito2 = () => {
-    if (this.meteorito2.x < -80) {
-      this.meteorito2.x = 650;
-      this.meteorito2.y = Math.floor(Math.random() * 400);
-      this.meteorito2.h = Math.floor(Math.random() * (125 - 40 + 1)) + 40;
-      this.meteorito2.w = Math.floor(Math.random() * (110 - 40 + 1)) + 40;
-    }
-  };
+ // returnMeteorito2 = () => {
+  //  if (this.meteorito2.x < -80) {
+  //    this.meteorito2.x = 650;
+   //   this.meteorito2.y = Math.floor(Math.random() * 400);
+  //    this.meteorito2.h = Math.floor(Math.random() * (125 - 40 + 1)) + 40;
+  //    this.meteorito2.w = Math.floor(Math.random() * (110 - 40 + 1)) + 40;
+  //  }
+ // };
 
   //*colisionProtaMeteorito2 = () => {
   // if (
@@ -104,13 +112,14 @@ class Game {
 
   colisionProtaMeteorito = () => {
     this.meteoroArr.forEach((eachMeteo) => {
-      /////////////////////// colision
+               
       if (
         eachMeteo.x < this.prota.x + this.prota.w &&
         eachMeteo.x + eachMeteo.w > this.prota.x &&
         eachMeteo.y < this.prota.y + this.prota.h &&
         eachMeteo.h + eachMeteo.y > this.prota.y
       ) {
+        
         this.gameOver();
         //console.log("Protagonista Chocado");
         // activar el fin del juego (RECORDAR)////*/*/*/**/*//*/*/*/*/**//*/*/*/**//**/*/ */ */ */ */
@@ -133,10 +142,16 @@ class Game {
   //  });
   ///  };
   removeMeteo = () => {
-    if (this.meteoroArr[0].x < 0) {
+    if (this.meteoroArr[0].x + this.meteoroArr[0].w < 0) {
       this.meteoroArr.shift();
     }
   };
+sinOxigeno = () => {
+  if(oxigeno <= 0) {
+    this.gameOver()}
+}
+
+  
   /*      COLISION TIPO FLECHA 
 
   colisionShotArrMeteoroArr = () => {                          
@@ -156,7 +171,13 @@ class Game {
       }
     }
   }; */
- 
+  removeShot = () => {
+    this.shotArr.forEach((bala) => {
+    if (bala.x > 620){
+      this.shotArr.shift()
+    }
+  })
+}
   // COLISION TIPO forEach()
 
   colisionShotArrMeteoroArr = () => {
@@ -167,9 +188,19 @@ class Game {
           bala.x < meteoro.x + meteoro.w &&
           bala.y + bala.h > meteoro.y &&
           bala.y < meteoro.y + meteoro.h
-        ) {
+        ) { puntos += 100;
+          ctx.globalAlpha = 0.5;
+          romperSound.volume = 0.3
+          romperSound.pause()
+          romperSound.currentTime = 0;
+          romperSound.play()
+          romperSound.loop = false;
           this.shotArr.splice(this.shotArr.indexOf(bala), 1);
           this.meteoroArr.splice(this.meteoroArr.indexOf(meteoro), 1);
+          ctx.globalAlpha = 0.9
+          setTimeout(function () {
+           ctx.globalAlpha = 1;
+          }, 30);
         }
       });
     });
@@ -203,26 +234,27 @@ class Game {
     this.prota.gravity();
     this.gravedad();
     this.checkColisionProtaSuelo();
-    this.shot.moveShot();
+    //this.shot.moveShot();
     this.collisionO2();
     this.colisionShotArrMeteoroArr();
     // 3. dibujado de los elementos
-
+this.removeShot();
     this.drawBg();
     this.prota.drawProta();
-    this.shot.drawShot();
+    //this.shot.drawShot();
     this.shotArr.forEach((eachShot) => {
       eachShot.drawShot();
       eachShot.moveShot();
     });
+   // this.removeShot();
     this.generaMeteo();
     this.removeMeteo();
     this.meteoroArr.forEach((eachMeteo) => {
       eachMeteo.drawMeteo();
       eachMeteo.moveMeteo();
     });
-
-    //this.colisionProtaMeteorito();
+    this.sinOxigeno();
+    this.colisionProtaMeteorito();
     this.o2item.drawo2();
     this.o2item.moveo2();
     // 4. recursion y control
