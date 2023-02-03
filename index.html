@@ -25,7 +25,17 @@
     <!--PANTALLA GAME OVER -->
     <div id="gameover-screen" class="container">
       <img src="./images/game-over.gif" width="600" heigth="400" alt="logo">
-      <button id="restart-btn">*Reiniciar*</button>
+      <script>
+        
+        function draw() {
+         
+          ctx = canvas.getContext("2d");
+          ctx.fillStyle = "white";
+          ctx.font = "30px Arial";
+          ctx.fillText("Texto blanco en el canvas", 50, 90);
+        }
+      </script>
+      <button id="restart-btn">*Reiniciar* <h1> Puntuacion:<span id="finalpoints"> 0 </span><h1></h1></button>
     </div>
 
   </div>
