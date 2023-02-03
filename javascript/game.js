@@ -81,6 +81,7 @@ class Game {
       });
     });
   };
+
   // FUNCIONES PROTAGONISTA * *
 
   shotProta = (event) => {
@@ -129,18 +130,25 @@ class Game {
     } else if (puntos === 3000) {
       this.Dif = 2;
     } else if (puntos === 4500) {
-      this.Dif = 4;
+      this.Dif = 3;
     } else if (puntos === 7000) {
-      this.Dif = 6;
+      this.Dif = 5;
     } else if (puntos === 9500) {
       this.Dif = 8;
     } else if (puntos === 13500) {
       this.Dif = 10;
     } else if (puntos === 15000) {
-      this.Dif = 15
+      this.Dif = 15;
     }
   };
 
+  gravedad = () => {
+    if (this.prota.speed < 2.5) {
+      this.prota.speed += 0.05;
+    } else {
+      this.prota.speed += 0;
+    }
+  };
   // GameOver  * * *
   gameOver = () => {
     // 1. IMPORTANTE! detener la recursion
@@ -154,7 +162,7 @@ class Game {
 
     // 3. mostrar la pantalla final
     gameoverScreenDOM.style.display = "flex";
-    finalpoints.innerText = points
+    finalpoints.innerText = points;
   };
 
   drawBg = () => {
@@ -164,13 +172,7 @@ class Game {
   clearCanvas = () => {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
   };
-  gravedad = () => {
-    if (this.prota.speed < 2.5) {
-      this.prota.speed += 0.05;
-    } else {
-      this.prota.speed += 0;
-    }
-  };
+
   //  G A M E   L O O P    //
 
   gameLoop = () => {

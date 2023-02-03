@@ -11,7 +11,7 @@ let oxigenDOM = document.querySelector("#oxigeno");
 let divScore = document.querySelector("#puntos-p");
 let divOxigeno = document.querySelector("#oxigeno-p");
 let resetDOM = document.querySelector("#restart-btn");
-let finalpoints = document.querySelector("#finalpoints")
+let finalpoints = document.querySelector("#finalpoints");
 let puntos = 0;
 let oxigeno = 100;
 
@@ -27,12 +27,12 @@ const gameOverSound = new Audio("./sound/gameover.mp3");
 
 // * STATE MANAGEMENT FUNCTIONS
 function startGame() {
-  // 1. PREPARACION DE PANTALLA 
- 
+  // 1. PREPARACION DE PANTALLA
+
   startScreenDOM.style.display = "none";
   canvas.style.display = "block";
   divOxigeno.style.display = "block";
- 
+
   divScore.style.display = "block";
   // 2. crear un objeto de la clase Game
   game = new Game();
@@ -40,13 +40,12 @@ function startGame() {
   let intervalOx = setInterval(function () {
     oxigeno--;
   }, 500);
-// PREPARACION DE SONIDO
+  // PREPARACION DE SONIDO
   sound.play();
   game.gameLoop();
 }
 
 //FUNCIONALIDADES DEL JUEGO *
-
 
 //PERSONAJE
 
